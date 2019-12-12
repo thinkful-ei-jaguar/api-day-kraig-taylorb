@@ -26,8 +26,19 @@ function updateItem (id, updateData) {
     })
 }
 
+let deleteItem = function(id){
+    return fetch (`${BASE_URL}/items/${id}`, {
+      
+        method: 'DELETE',
+    
+   });
+        
+    };
+
+
 export default {
     getItems,
     createItem,
-    updateItem
+    updateItem,
+    deleteItem
 };

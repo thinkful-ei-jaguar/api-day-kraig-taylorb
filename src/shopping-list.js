@@ -75,12 +75,18 @@ const handleDeleteItemClicked = function () {
     // get the index of the item in store.items
     const id = getItemIdFromElement(event.currentTarget);
     // delete the item
-    store.findAndDelete(id);
+    api.deleteItem(id)
+    .then(res => res.json())
+    .then(() => {
+      store.findAndDelete(id);
+      render();
+    //store.findAndDelete(id);
     // render the updated shopping list
-    render();
+   // render();
+  
   });
+});
 };
-
 const handleEditShoppingItemSubmit = function () {
   $('.js-shopping-list').on('submit', '.js-edit-item', event => {
     event.preventDefault();
