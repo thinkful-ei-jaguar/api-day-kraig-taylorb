@@ -57,9 +57,10 @@ const handleNewItemSubmit = function () {
     .then((newItem) => {
       store.addItem(newItem);
       render();
-      });
-      //store.addItem(newItemName);
-      //render();
+      })
+     .catch(err => console.error(err.message));
+      //render(); 
+       
     });
 };
 
@@ -106,6 +107,12 @@ const handleEditShoppingItemSubmit = function () {
   });
 };
 
+const displayErrorMessage = function (error) {
+    $('.js-error-message').html(`<h2>${error.message}</h2>`);
+    $('.js-error-message').removeClass('hidden');
+    render();
+}
+
 const handleItemCheckClicked = function () {
   $('.js-shopping-list').on('click', '.js-item-toggle', event => {
     const id = getItemIdFromElement(event.currentTarget);
@@ -136,6 +143,7 @@ const bindEventListeners = function () {
   handleDeleteItemClicked();
   handleEditShoppingItemSubmit();
   handleToggleFilterClick();
+  displayErrorMessage();
 };
 // This object contains the only exposed methods from this module:
 export default {

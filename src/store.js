@@ -32,7 +32,7 @@ export default {
   hideCheckeditems,
   findById,
   addItem,
- findAndUpdate,
+  findAndUpdate,
   findAndDelete,
   toggleCheckedFilter
 };

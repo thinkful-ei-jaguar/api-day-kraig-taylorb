@@ -1,6 +1,7 @@
 const BASE_URL = 'https://thinkful-list-api.herokuapp.com/taylorbkraig';
 
 function getItems () {
+    
     return fetch (`${BASE_URL}/items`); 
 }
 
@@ -32,8 +33,7 @@ let deleteItem = function(id){
         method: 'DELETE',
     
    });
-        
-    };
+};
 
 
 export default {
