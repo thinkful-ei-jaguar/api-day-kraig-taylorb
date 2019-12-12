@@ -51,15 +51,15 @@ const handleNewItemSubmit = function () {
     event.preventDefault();
     const newItemName = $('.js-shopping-list-entry').val();
     $('.js-shopping-list-entry').val('');
-    
+
     api.createItem(newItemName)
     .then(res => res.json())
     .then((newItem) => {
       store.addItem(newItem);
       render();
       });
-      store.addItem(newItemName);
-      render();
+      //store.addItem(newItemName);
+      //render();
     });
 };
 
