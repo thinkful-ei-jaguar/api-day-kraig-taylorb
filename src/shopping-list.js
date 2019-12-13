@@ -35,6 +35,7 @@ const generateShoppingItemsString = function (shoppingList) {
 const render = function () {
   // Filter item list if store prop is true by item.checked === false
   let items = [...store.items];
+
   if (store.hideCheckedItems) {
     items = items.filter(item => !item.checked);
   }
@@ -53,13 +54,10 @@ const handleNewItemSubmit = function () {
     $('.js-shopping-list-entry').val('');
 
     api.createItem(newItemName)
-    .then(res => res.json())
     .then((newItem) => {
       store.addItem(newItem);
       render();
       })
-     .catch(err => console.error(err.message));
-      //render(); 
        
     });
 };
@@ -77,13 +75,9 @@ const handleDeleteItemClicked = function () {
     const id = getItemIdFromElement(event.currentTarget);
     // delete the item
     api.deleteItem(id)
-    .then(res => res.json())
     .then(() => {
       store.findAndDelete(id);
       render();
-    //store.findAndDelete(id);
-    // render the updated shopping list
-   // render();
   
   });
 });
@@ -96,10 +90,9 @@ const handleEditShoppingItemSubmit = function () {
     
     
    
-    api.updateItem(id, { itemName })
-      .then(res => res.json())
+    api.updateItem(id, { name: itemName })
       .then((newItem) => {
-        store.findAndUpdate(id, itemName);
+        store.findAndUpdate(id, { name: itemName });
         render();
         });
     
@@ -107,25 +100,16 @@ const handleEditShoppingItemSubmit = function () {
   });
 };
 
-const displayErrorMessage = function (error) {
-    $('.js-error-message').html(`<h2>${error.message}</h2>`);
-    $('.js-error-message').removeClass('hidden');
-    render();
-}
 
 const handleItemCheckClicked = function () {
   $('.js-shopping-list').on('click', '.js-item-toggle', event => {
     const id = getItemIdFromElement(event.currentTarget);
 const item= store.findById(id);
     api.updateItem(id,  {checked:!item.checked} )
-    .then(res => res.json())
     .then((newItem) => {
       store.findAndUpdate(id, {checked:!item.checked} );
       render();
       });
-
-
-
     render();
   });
 };
@@ -143,7 +127,6 @@ const bindEventListeners = function () {
   handleDeleteItemClicked();
   handleEditShoppingItemSubmit();
   handleToggleFilterClick();
-  displayErrorMessage();
 };
 // This object contains the only exposed methods from this module:
 export default {

@@ -14,8 +14,8 @@ const addItem = function (item) {
 };
 
 const findAndUpdate = function(id, newData){
-  let newItem= this.findById(id)
-  return Object.assign(newItem, newData)
+  let newItem= this.findById(id);
+  return Object.assign(newItem, newData);
   }
 
 
